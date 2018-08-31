@@ -1,0 +1,177 @@
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+        }
+
+        body {
+            background: url('http://img05.tooopen.com/images/20150820/tooopen_sy_139205349641.jpg') no-repeat;
+            background-size: contain;
+            background-position: center;
+
+        }
+
+        .wl-alert {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+
+        }
+
+        .wl-container {
+            position: absolute;
+            width: 400px;
+            min-height: 100px;
+            padding-bottom: 40px;
+            background-color: white;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            overflow: hidden;
+            border-radius: 10px;
+        }
+
+        .wl-container>h3,
+        .wl-container>p {
+            text-align: center;
+            color: #555;
+        }
+
+        .wl-container>h3 {
+            padding: 5px 0;
+        }
+
+        .wl-container>p {
+            padding: 20px 50px;
+            /* background-color: bisque; */
+        }
+
+        .wl-group-btn {
+            position: absolute;
+            left: 0;
+            bottom: -1px;
+            width: inherit;
+        }
+
+        .wl-group-btn>button {
+            width: 50%;
+            height: 40px;
+            float: left;
+            border: none;
+            background-color: darkslategray;
+            color: white;
+            outline: none;
+            cursor: pointer;
+        }
+
+        .wl-group-btn>button:active {
+            background-color: cyan;
+        }
+
+        .wl-group-btn>button:last-child {
+            border-left: 1px solid white;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="box"></div>
+
+    <script>
+        function WAlert(obj) {
+
+            // if (this === window) {
+            //     return new WAlert();
+            // }
+
+
+            if (this instanceof WAlert) {
+
+                this.init(obj);
+                console.log('init');
+            } else {
+                console.log('new');
+                return new WAlert(obj);
+            }
+        }
+        WAlert.prototype = {
+            init: function (obj) {
+                this.core = {};
+                this.core.container = obj.container || 'body';
+                this.core.text = obj.text || '';
+                this.core.confirm = obj.confirm;
+                this.core.cancel = obj.cancel;
+                this.render()
+            },
+            addEvent: function () {
+
+                var btnG = this.selectorEle('.wl-group-btn'),
+                    children = btnG.children,
+                    self = this;
+
+                console.log(btnG.children);
+                for (var i = 0; i < children.length; i++) {
+                    children[i].addEventListener('click', function (event) {
+
+                        var currentElement = event.target;
+
+                        if (currentElement.innerText === '确定') {
+
+                            self.core.confirm(event);
+                        } else {
+
+                            self.core.cancel(event);
+                        }
+
+                    });
+                }
+
+            },
+            render: function () {
+
+                var domStr = [
+                    '<div class="wl-alert">',
+                    '<div class="wl-container">',
+                    '<h3>提示</h3>',
+                    '<p>',
+                    this.core.text,
+                    '</p>',
+                    '<div class="wl-group-btn">',
+                    '<button>确定</button>',
+                    '<button>取消</button>',
+                    '</div>',
+                    '</div>',
+                    '</div>'
+                ].join('');
+
+                this.selectorEle(this.core.container).innerHTML = domStr;
+                this.addEvent();
+            },
+            selectorEle(selector, all = false) {
+                return all ? document.querySelectorAll(selector) : document.querySelector(selector)
+            }
+        }
+
+        WAlert({
+            container: '.box',
+            text: '电视剧佛啊按实际佛啊祭祀东风假的',
+            confirm: function (e) {
+                console.log('确定', e);
+            },
+            cancel: function (e) {
+                console.log('取消', e);
+            }
+        });
+    </script>
+</body>
+
+</html>

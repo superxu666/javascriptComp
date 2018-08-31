@@ -1,0 +1,38 @@
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="index.css">
+</head>
+
+<body>
+
+
+    <div class="box"></div>
+
+    <form action="" id="page-go">
+        <input type="text" id="page-num">
+        <input type="submit" id="goto" value="GO">
+    </form>
+
+    <script src="index.js"></script>
+    <script>
+        var pagePagination = new SimplePagination(15);
+        pagePagination.init({
+            container: '.box',
+            maxShowBtnCount: 3,
+            onPageChange: state => {
+                console.log('pagination change:', state.pageNumber);
+            }
+        });
+        document.getElementById('page-go').addEventListener('submit', e => {
+            e.preventDefault();
+            pagePagination.gotoPage(+document.getElementById('page-num').value)
+        })
+    </script>
+</body>
+
+</html>
