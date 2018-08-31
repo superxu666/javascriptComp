@@ -1,0 +1,73 @@
+* {
+    padding: 0;
+    margin: 0;
+}
+
+body {
+    background: url('http://img05.tooopen.com/images/20150820/tooopen_sy_139205349641.jpg') no-repeat;
+    background-size: contain;
+    background-position: center;
+
+}
+
+.wl-alert {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+
+}
+
+.wl-container {
+    position: absolute;
+    width: 400px;
+    min-height: 100px;
+    padding-bottom: 40px;
+    background-color: white;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    overflow: hidden;
+    border-radius: 10px;
+}
+
+.wl-container>h3,
+.wl-container>p {
+    text-align: center;
+    color: #555;
+}
+
+.wl-container>h3 {
+    padding: 5px 0;
+}
+
+.wl-container>p {
+    padding: 20px 50px;
+    /* background-color: bisque; */
+}
+
+.wl-group-btn {
+    position: absolute;
+    left: 0;
+    bottom: -1px;
+    width: inherit;
+}
+
+.wl-group-btn>button {
+    width: 50%;
+    height: 40px;
+    float: left;
+    border: none;
+    background-color: darkslategray;
+    color: white;
+    outline: none;
+    cursor: pointer;
+}
+
+.wl-group-btn>button:active {
+    background-color: cyan;
+}
+
+.wl-group-btn>button:last-child {
+    border-left: 1px solid white;
+}
